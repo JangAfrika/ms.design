@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System settings · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>System settings</h1>
+      <div class="grow"><button type="button" id="reloadBtn">Refresh</button></div>
+    </div>
+    <p class="page-intro">Changes take effect immediately and are recorded in the audit log. Secret values stay hidden.</p>
+    <div class="toolbar" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search setting">
+      <select id="catFilter"></select>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Setting</th><th>Group</th><th>Value</th><th>Last changed</th><th></th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <dialog id="setDialog">
+    <form class="dlg" id="setForm" novalidate>
+      <h3 id="setTitle">Change setting</h3>
+      <div class="info" id="setInfo"></div>
+      <div id="setField"></div>
+      <label>Reason <input name="reason" type="text" maxlength="200" placeholder="Changed in settings"></label>
+      <div class="err" id="setError"></div>
+      <div class="btns">
+        <button type="button" id="setCancel">Cancel</button>
+        <button type="submit" class="primary" id="setSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/settings.js"></script>
+</body>
+</html>
