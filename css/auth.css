@@ -1,0 +1,45 @@
+/* ===== Sign in, sign up, forgotten password ===== */
+.auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: linear-gradient(160deg, #12306b 0%, #0b1d47 100%); }
+.auth-card { width: min(420px, 100%); background: #fff; border-radius: 12px; padding: 30px 28px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.auth-card.wide { width: min(620px, 100%); }
+.auth-card .lg { text-align: center; }
+.auth-card .lg img { max-height: 70px; max-width: 200px; object-fit: contain; margin-bottom: 8px; }
+.auth-card h1 { text-align: center; margin: 4px 0 2px; font-size: 19px; color: #12306b; }
+.auth-card .sub { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+.auth-card h2 { font-size: 12px; margin: 18px 0 10px; color: #12306b; text-transform: uppercase; letter-spacing: .6px; }
+.auth-card .wideBtn { width: 100%; margin-top: 4px; padding: 11px 14px; background: #12306b; border-color: #12306b; }
+.auth-links { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; }
+.auth-links a { color: #12306b; }
+.steps { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; font-size: 12.5px; color: var(--muted); }
+.steps span { padding: 3px 10px; border-radius: 999px; background: #eef1f6; }
+.steps span.on { background: #12306b; color: #fff; }
+.hp { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
+.center { text-align: center; }
+.policy { border: 1px solid var(--line); background: #f8f9fc; border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: var(--muted); max-height: 110px; overflow: auto; margin: 6px 0 8px; white-space: pre-wrap; }
+.policy b { color: var(--ink); display: block; margin-bottom: 2px; }
+.edit-banner { display: flex; align-items: center; gap: 10px; background: #fff1cc; color: #6b4a05; border: 1px solid #e9c46a; border-radius: 8px; padding: 8px 12px; font-size: 12px; }
+.auth-mark { width: 56px; height: 56px; border-radius: 12px; background: var(--side); color: #fff; font-weight: 800; font-size: 21px; display: inline-flex; align-items: center; justify-content: center; letter-spacing: .5px; }
+/* MS: "Forgot password?" reads as a link */
+.auth-links .linkbtn { color: #12306b; font-size: 13px; cursor: pointer; }
+body.dark .auth-links .linkbtn { color: #8fb0ff; }
+/* MS: "Continue with Google", the OR line, sign-up, check-your-email and waiting-for-approval cards */
+.google-box { margin: 2px 0 6px; }
+.google-btn { display: flex; justify-content: center; min-height: 44px; }
+.or-line { display: flex; align-items: center; gap: 12px; margin: 16px 0 14px; color: var(--muted); font-size: 11.5px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; }
+.or-line::before, .or-line::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.auth-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 2px 0 8px; font-size: 13px; }
+.auth-row label.check { margin: 0; font-size: 13px; }
+.auth-row .linkbtn { color: #12306b; font-size: 13px; cursor: pointer; }
+.auth-foot { text-align: center; margin-top: 16px; font-size: 13.5px; color: var(--muted); }
+.linkbtn.strong { color: #12306b; font-weight: 700; text-decoration: none; font-size: 13.5px; cursor: pointer; }
+.linkbtn.strong:hover { text-decoration: underline; }
+.auth-resend { margin: -2px 0 10px; }
+.auth-resend button { width: 100%; }
+.auth-card .wideBtn.plain { background: transparent; color: #12306b; border-color: #12306b; }
+.auth-card .opt { color: var(--muted); font-weight: 400; }
+.auth-icon { width: 56px; height: 56px; border-radius: 50%; background: #eef1f6; color: #12306b; display: inline-flex; align-items: center; justify-content: center; font-size: 26px; }
+.auth-p { font-size: 13.5px; line-height: 1.5; color: var(--ink); margin: 0 0 14px; text-align: center; }
+body.dark .auth-row .linkbtn, body.dark .linkbtn.strong { color: #8fb0ff; }
+body.dark .auth-card .wideBtn.plain { color: #8fb0ff; border-color: #8fb0ff; background: transparent; }
+body.dark .auth-icon { background: #232a38; color: #9db9ff; }
+@media (max-width: 420px) { .auth-card { padding: 24px 18px 20px; } .auth-row { flex-direction: column; align-items: flex-start; } }
