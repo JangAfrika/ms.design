@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goods received · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Goods received</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>Record goods received</button></div>
+    </div>
+    <div class="notice-bar">Count what the supplier delivered against the purchase order and reject anything damaged or wrong. A second person checks the note; only then does the stock go up.</div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="on" data-tab="all">All</button>
+      <button type="button" data-tab="verify">To check</button>
+    </div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search GRN, order, supplier or item">
+      <select id="statusFilter"></select>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>GRN</th><th>Received</th><th>Order</th><th>Supplier</th><th>Accepted</th><th>Received by</th><th>Status</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="grnDialog" class="fin-wide">
+    <form class="dlg" id="grnForm" novalidate>
+      <h3>Record goods received</h3>
+      <label class="req">Purchase order <select id="gPo" required></select></label>
+      <div id="gLines"></div>
+      <div class="err" id="grnError"></div>
+      <div class="btns">
+        <button type="button" id="grnCancel">Cancel</button>
+        <button type="submit" class="primary" id="grnSave">Save for checking</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/stores-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/goods-received.js"></script>
+</body>
+</html>

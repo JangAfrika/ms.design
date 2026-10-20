@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employees · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Employees</h1>
+      <div class="grow"><button type="button" class="primary" id="addBtn" hidden>Add employee</button></div>
+    </div>
+    <div class="toolbar" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search name, number or phone">
+      <select id="statusFilter"></select>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>No.</th><th>Name</th><th>Position</th><th>Department</th><th>Employment</th><th>Login account</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="empDialog">
+    <form class="dlg" id="empForm" novalidate>
+      <h3>Add employee</h3>
+      <div class="info">The employee gets the next staff number. You can create their login from their page afterwards.</div>
+      <div class="two">
+        <label class="req">First name <input name="first_name" type="text" maxlength="60" required></label>
+        <label class="req">Last name <input name="last_name" type="text" maxlength="60" required></label>
+      </div>
+      <div class="two">
+        <label>Phone <input name="phone" type="tel" maxlength="40" placeholder="+220 …"></label>
+        <label>Gender <select name="gender" id="eGender"></select></label>
+      </div>
+      <label class="req">Position <select name="position_id" id="ePosition" required></select></label>
+      <label>Reports to <select name="reporting_manager_id" id="eManager"></select></label>
+      <div class="two">
+        <label>Employment type <select name="employment_type" id="eType"></select></label>
+        <label class="req">Start date <input name="start_date" type="date" required></label>
+      </div>
+      <label id="eSalaryWrap" hidden>Basic salary <input name="basic_salary" type="number" min="0" step="0.01"></label>
+      <div class="err" id="empError"></div>
+      <div class="btns">
+        <button type="button" id="empCancel">Cancel</button>
+        <button type="submit" class="primary" id="empSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/employees.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supplier bills & payments · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Supplier bills &amp; payments</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>Record supplier bill</button></div>
+    </div>
+    <div class="notice-bar">Every bill is matched against its purchase order and the goods received. A bill that does not match waits for the Finance Manager. Payments are prepared, approved by someone else, then paid.</div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="on" data-tab="bills">All bills</button>
+      <button type="button" data-tab="open">Bills to pay</button>
+      <button type="button" data-tab="mismatch" id="tabMismatch">Not matching</button>
+      <button type="button" data-tab="pay-approve" id="tabPayApprove">Payments to approve</button>
+      <button type="button" data-tab="pay-pay" id="tabPayPay">Approved, to pay</button>
+      <button type="button" data-tab="payments">All payments</button>
+    </div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search bill number, supplier or order">
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead id="listHead"></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="billDialog" class="fin-wide">
+    <form class="dlg" id="billForm" novalidate>
+      <h3>Record supplier bill</h3>
+      <div class="info">Enter the bill as the supplier wrote it. The lines start from what was received and not billed yet; change them to what the bill says.</div>
+      <label class="req">Purchase order <select id="bPo" required></select></label>
+      <div class="three">
+        <label class="req">Supplier's bill number <input name="supplier_invoice_ref" id="bRef" type="text" maxlength="60" required></label>
+        <label class="req">Bill date <input name="invoice_date" id="bDate" type="date" required></label>
+        <label>Due date <input name="due_date" id="bDue" type="date"></label>
+      </div>
+      <div class="two">
+        <label class="req">Bill total (with tax) <input name="amount" id="bAmount" type="number" min="0" step="0.01" required></label>
+        <label>Of which tax <input name="tax_amount" id="bTax" type="number" min="0" step="0.01"></label>
+      </div>
+      <div id="bLines"></div>
+      <div id="bMatch"></div>
+      <div class="err" id="billError"></div>
+      <div class="btns">
+        <button type="button" id="billCancel">Cancel</button>
+        <button type="button" id="billCheck">Check the match</button>
+        <button type="submit" class="primary" id="billSave">Record bill</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/finance-common.js"></script>
+  <script src="js/stores-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/supplier-bills.js"></script>
+</body>
+</html>
