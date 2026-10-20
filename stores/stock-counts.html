@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock counts · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Stock counts</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>Start a count</button></div>
+    </div>
+    <div class="notice-bar">Count what is on the shelves, explain every difference, then hand the count in. Someone else checks it; the differences become stock adjustments for approval.</div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="on" data-tab="all">All</button>
+      <button type="button" data-tab="verify">To check</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Count date</th><th>Type</th><th>Counted by</th><th class="num">Items counted</th><th class="num">Differences</th><th class="num" id="valHead">Value of differences</th><th class="num">Accuracy</th><th>Status</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="startDialog">
+    <form class="dlg" id="startForm" novalidate>
+      <h3>Start a stock count</h3>
+      <div class="info">The system writes down what it expects on each shelf now. Count, then enter what you find.</div>
+      <div class="two">
+        <label class="req">Count date <input name="count_date" id="sDate" type="date" required></label>
+        <label>Items <select name="inventory_category_id" id="sCat"></select></label>
+      </div>
+      <div class="err" id="startError"></div>
+      <div class="btns">
+        <button type="button" id="startCancel">Cancel</button>
+        <button type="submit" class="primary" id="startSave">Start</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/stores-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/stock-counts.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
