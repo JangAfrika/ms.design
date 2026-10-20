@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="crumbs" id="dCrumbs"><a href="finance/invoices.html">Invoices</a></div>
+    <div class="page-head"><h1 id="dTitle">Invoice</h1><div class="grow" id="dActions"></div></div>
+    <div class="msg" id="dStatus" role="status"></div>
+    <div id="dBody"></div>
+  </main>
+
+  <dialog id="cnDialog" class="fin-mid">
+    <form class="dlg" id="cnForm" novalidate>
+      <h3>Credit note</h3>
+      <div class="info" id="cnInfo">A credit note reduces what the customer owes on this invoice. It cannot be more than the open balance.</div>
+      <div class="two">
+        <label class="req">Amount to credit (before VAT) <input name="amount" id="cnAmount" type="number" min="0" step="0.01"></label>
+        <label>Revenue account <select name="revenue_account_id" id="cnAccount"></select></label>
+      </div>
+      <label class="req">Reason <textarea name="reason" rows="2" maxlength="300" placeholder="e.g. 20 flyers misprinted, customer accepted a discount"></textarea></label>
+      <div class="err" id="cnError"></div>
+      <div class="btns">
+        <button type="button" id="cnCancel">Cancel</button>
+        <button type="submit" class="primary" id="cnSave">Issue credit note</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="noteDialog">
+    <form class="dlg" id="noteForm" novalidate>
+      <h3 id="noteTitle">Reason</h3>
+      <div class="info" id="noteInfo"></div>
+      <label class="req" id="noteLabel">Reason <textarea id="noteText" rows="3" maxlength="300"></textarea></label>
+      <div class="err" id="noteError"></div>
+      <div class="btns">
+        <button type="button" id="noteCancel">Cancel</button>
+        <button type="submit" class="primary" id="noteSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/finance-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/invoice.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>

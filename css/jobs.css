@@ -1,0 +1,115 @@
+/* ===== Jobs: list, new job form, and the digital Work Sheet Report (screen + A4 print) ===== */
+
+/* ---- new job form ---- */
+.job-form { max-width: 860px; }
+.job-form h2 { font-size: 13.5px; margin: 16px 0 8px; }
+.job-form h2:first-child, .job-form .notice-bar + div h2 { margin-top: 0; }
+.job-form .form-foot { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
+.loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 12px; margin: 6px 0 12px; }
+.loc-grid.one { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); max-height: 55vh; overflow-y: auto; }
+label.loc { margin: 0; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; font-size: 12.5px; }
+label.loc:has(input:checked) { border-color: var(--navy); background: rgba(18,48,107,.05); }
+dialog.wide-dlg { width: min(640px, 94vw); }
+#emergencyDialog { width: min(900px, 94vw); }
+
+/* ---- job page: actions, notices, menu ---- */
+.job-actions { align-items: center; }
+.jmenu { position: relative; }
+.jmenu > summary { list-style: none; cursor: pointer; }
+.jmenu > summary::-webkit-details-marker { display: none; }
+.jmenu-list { position: absolute; right: 0; top: calc(100% + 4px); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 8px 24px rgba(10,20,50,.18); min-width: 230px; z-index: 30; padding: 4px 0; }
+.jmenu-list button { display: block; width: 100%; text-align: left; border: none; border-radius: 0; background: none; padding: 8px 12px; color: var(--ink); }
+.jmenu-list button:hover { background: #eef3fb; color: var(--accent); }
+.notice-bar.danger { background: #fdecea; border-color: #f3b8b2; color: #8f1a12; }
+.approval { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 3px 0; }
+.approval .acts { display: flex; gap: 6px; }
+.approval .acts button { padding: 4px 10px; font-size: 12px; }
+.approval .sub { color: var(--muted); font-size: 12px; }
+.dpanel h3 .sub, .h3-acts { font-weight: 400; font-size: 12px; color: var(--muted); margin-left: 6px; }
+.dpanel h3 .linkbtn { margin-left: 6px; }
+ul.jcomments { list-style: none; margin: 0 0 10px; padding: 0; font-size: 12.5px; max-height: 360px; overflow-y: auto; }
+ul.jcomments li { padding: 7px 0; border-bottom: 1px solid #edf0f5; }
+ul.jcomments li.empty { padding: 16px; border: none; }
+ul.jcomments .sub { color: var(--muted); font-size: 11px; }
+ul.jcomments p { margin: 3px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comment-form { display: flex; gap: 8px; align-items: flex-end; }
+.comment-form textarea { margin: 0; }
+.upload-form { margin: 10px 0 0; }
+.upload-form input[type=file] { width: auto; max-width: 100%; margin: 0; border: none; padding: 4px 0; background: none; }
+
+/* ---- priority line, Emergency request and the jobs it would push back ---- */
+.prio-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 7px 12px; margin: 0 0 12px; font-size: 12.5px; }
+.prio-line .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.prio-line .sub { color: var(--muted); }
+.prio-line .grow { flex: 1; }
+.prio-line button { padding: 4px 10px; font-size: 12px; }
+.notice-bar.emergency-req { background: #fdf1ec; border-color: #f0c2ad; color: #7a2e0e; }
+.impact { margin-top: 8px; }
+.impact .impact-head { margin: 0 0 6px; font-size: 12.5px; }
+.impact .sub, .job-form .sub { color: var(--muted); font-size: 12px; font-weight: 400; }
+.impact .tablewrap { max-height: 260px; overflow-y: auto; }
+.impact table { font-size: 12px; background: var(--panel); color: var(--ink); }
+.em-box { border: 1px solid #f0c2ad; background: #fdf1ec; border-radius: 6px; padding: 10px 12px; margin: 4px 0 12px; }
+.em-box .info { margin: 0 0 8px; }
+
+/* ---- the Work Sheet ---- */
+.worksheet { --ws-ink2: #4a5866; --ws-soft: #eaf0fa; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; margin-bottom: 4px; }
+.ws-head { border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 10px; }
+.ws-title { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.ws-company { font-weight: 800; letter-spacing: .04em; font-size: 14px; }
+.ws-name { font-weight: 700; letter-spacing: .08em; color: var(--ws-ink2); }
+.ws-no { margin-left: auto; font-family: ui-monospace, Consolas, monospace; font-size: 17px; color: #c2410c; font-weight: 700; }
+.ws-fields, .ws-sign { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 16px; margin-top: 10px; }
+.ws-field { display: flex; flex-direction: column; border-bottom: 1px dotted var(--line); padding-bottom: 4px; min-width: 0; overflow-wrap: anywhere; }
+.ws-field .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.ws-items { font-size: 12.5px; margin: 6px 0 10px; }
+.ws-section-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 16px 0 6px; }
+.ws-section-head h3 { letter-spacing: .08em; font-size: 13px; margin: 0; }
+.ws-section-head button { padding: 4px 10px; font-size: 12px; }
+.ws-locations { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.ws-locations .empty { grid-column: 1 / -1; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0; }
+.ws-loc { display: grid; grid-template-columns: 26px 1fr auto; grid-template-areas: "tick name state" ". who acts"; gap: 2px 8px; align-items: center; padding: 8px 10px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 12.5px; min-width: 0; }
+.ws-loc .ws-tick { grid-area: tick; width: 20px; height: 20px; border: 1.5px solid var(--ws-ink2); border-radius: 3px; display: grid; place-items: center; font-weight: 800; color: var(--navy); }
+.ws-loc .ws-loc-name { grid-area: name; }
+.ws-loc .ws-loc-state { grid-area: state; font-size: 12px; }
+.ws-loc .ws-who { grid-area: who; color: var(--muted); }
+.ws-loc .ws-acts { grid-area: acts; display: flex; gap: 4px; justify-self: end; }
+.ws-loc .ws-acts button { padding: 3px 8px; font-size: 11.5px; }
+.ws-loc:not(.on) { color: var(--muted); }
+.ws-loc.on { background: var(--ws-soft); }
+.ws-loc .ok, .worksheet .ok { color: var(--green); }
+.ws-tablewrap { border-radius: 0; }
+.ws-sig { grid-column: span 2; margin-top: 14px; color: var(--ws-ink2); font-size: 12.5px; }
+@media (max-width: 860px) { .ws-locations { grid-template-columns: 1fr; } .ws-sig { grid-column: auto; } }
+
+/* ---- dark scheme ---- */
+body.dark .worksheet { --ws-ink2: #b8c2cc; --ws-soft: #1c2840; }
+body.dark .ws-no { color: #f0a070; }
+body.dark .notice-bar.danger { background: #3a1a17; border-color: #6b2a24; color: #f6b0a8; }
+body.dark .jmenu-list button:hover { background: #232a37; color: #9db9ff; }
+body.dark label.loc:has(input:checked) { background: rgba(91,140,255,.12); border-color: #5b8cff; }
+body.dark ul.jcomments li { border-bottom-color: var(--line); }
+body.dark .notice-bar.emergency-req, body.dark .em-box { background: #35201a; border-color: #6b3a26; color: #f5c3a8; }
+
+/* ---- print: the Work Sheet on one A4 page (same as the old Work Sheet print) ---- */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body, body.dark { --ink: #000; --muted: #555; --line: #999; --panel: #fff; --navy: #000; font-size: 11pt; }
+  .worksheet, body.dark .worksheet { --ws-ink2: #222; --ws-soft: #fff; }
+  .no-print, .crumbs, #dNotices, .msg, .page-head .grow, .page-head .pill, .worksheet button, .ws-acts { display: none !important; }
+  .page { padding: 0 !important; max-width: none; }
+  .page-head { margin-bottom: 6px; }
+  .page-head h1 { font-size: 13pt; color: #000; }
+  .worksheet { border: 0; padding: 0; box-shadow: none; background: #fff; color: #000; }
+  .ws-no { color: #000; }
+  .ws-locations { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .ws-fields, .ws-sign { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ws-sig { grid-column: span 2 !important; }
+  .ws-loc { padding: 5px 8px; break-inside: avoid; }
+  .ws-loc.on { background: none; }
+  .ws-tablewrap { border: 0; overflow: visible; background: #fff; }
+  table.ws-lines th, table.ws-lines td { border-bottom: 1px solid #999; padding: 4px 6px; background: #fff !important; color: #000; white-space: normal; }
+  table.ws-lines tr.clk:hover td { background: none; }
+  table.ws-lines td:nth-child(6), table.ws-lines td:nth-child(7) { white-space: nowrap; }
+  .worksheet .pill { background: none !important; color: #000 !important; padding: 0; font-weight: 600; }
+}

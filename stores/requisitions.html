@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Requisitions & issues · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Requisitions &amp; issues</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>New requisition</button></div>
+    </div>
+    <div class="notice-bar">Stock leaves the store only against an approved requisition. Material issued to a job is charged to the job's costing; what comes back unused is returned here.</div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="on" data-tab="all">All</button>
+      <button type="button" data-tab="approve" id="tabApprove" hidden>To approve</button>
+      <button type="button" data-tab="issue" id="tabIssue" hidden>Approved, to issue</button>
+      <button type="button" data-tab="mine" id="tabMine">Mine</button>
+    </div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search number, job, item or person">
+      <select id="statusFilter"></select>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Number</th><th>Date</th><th>Job</th><th>What is needed</th><th>Department</th><th>Requested by</th><th>Status</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="reqDialog" class="fin-wide">
+    <form class="dlg" id="reqForm" novalidate>
+      <h3>New requisition</h3>
+      <div class="info">Ask the store for material. For a job, leave the lines empty to request everything still needed on its Work Sheet.</div>
+      <div class="three">
+        <label>Job <select name="job_id" id="rJob"></select></label>
+        <label>Department <select name="department_id" id="rDept"></select></label>
+        <label>Needed by <input name="required_by" id="rNeed" type="date"></label>
+      </div>
+      <label class="check"><input name="is_emergency" id="rEmergency" type="checkbox"> Urgent</label>
+      <div id="rLines"></div>
+      <div class="err" id="reqError"></div>
+      <div class="btns">
+        <button type="button" id="reqCancel">Cancel</button>
+        <button type="submit" class="primary" id="reqSave">Send for approval</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/stores-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/requisitions.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
