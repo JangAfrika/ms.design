@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enquiries · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Enquiries</h1>
+      <div class="grow"><button type="button" class="primary" id="addBtn">Log an enquiry</button></div>
+    </div>
+    <div class="toolbar" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search number, customer or what they need">
+      <select id="statusFilter"></select>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>No.</th><th>Customer</th><th>What they need</th><th>Received</th><th>Status</th><th></th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="enqDialog">
+    <form class="dlg" id="enqForm" novalidate>
+      <h3>Log an enquiry</h3>
+      <div class="info">Acknowledge the customer quickly: an enquiry not acknowledged in time is marked late.</div>
+      <label>Existing customer <select name="customer_id" id="eCustomer"></select></label>
+      <label>Or prospect name <input name="prospect_name" id="eProspect" type="text" maxlength="120" placeholder="For someone who is not a customer yet"></label>
+      <label>Channel <select name="channel" id="eChannel"></select></label>
+      <label class="req">What do they need? <textarea name="description" rows="4" maxlength="2000" required></textarea></label>
+      <div class="err" id="enqError"></div>
+      <div class="btns">
+        <button type="button" id="enqCancel">Cancel</button>
+        <button type="submit" class="primary" id="enqSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="closeDialog">
+    <form class="dlg" id="closeForm" novalidate>
+      <h3 id="closeTitle">Close enquiry</h3>
+      <div class="info" id="closeInfo"></div>
+      <label class="req">Reason <textarea name="reason" rows="3" maxlength="500" required></textarea></label>
+      <div class="err" id="closeError"></div>
+      <div class="btns">
+        <button type="button" id="closeCancel">Cancel</button>
+        <button type="submit" class="danger-solid" id="closeSave">Close enquiry</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/enquiries.js"></script>
+</body>
+</html>
