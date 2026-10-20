@@ -13,6 +13,6 @@ window.APP_CONFIG = {
   // "Continue with Google" on the sign-in page: the OAuth client ID from Google Cloud (ends in .apps.googleusercontent.com).
   // It is NOT a secret. Put the same ID in System settings > GOOGLE_CLIENT_ID. Leave '' to hide the Google button.
   // Never put a client secret here or anywhere else.
-  GOOGLE_CLIENT_ID: ''
+  GOOGLE_CLIENT_ID: '560389458832-d2jchnffug3g4lr2tv2b81qln6rggeqt.apps.googleusercontent.com'
 };
 /* ================================================ */
