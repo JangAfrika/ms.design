@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roles & permissions · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Roles &amp; permissions</h1>
+      <div class="grow"><button type="button" id="reloadBtn">Refresh</button></div>
+    </div>
+    <p class="page-intro" id="intro">Scope: All = every record; Department = records of the user’s department; Own = records assigned to or created by the user; Limit = up to the approval limit.</p>
+    <div class="tabs" id="tabs"><button type="button" class="on" data-tab="matrix">Matrix</button><button type="button" data-tab="byrole">By role</button></div>
+    <div class="toolbar" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search permission">
+      <select id="moduleFilter"></select>
+      <select id="roleFilter" hidden></select>
+    </div>
+    <div class="legend"><span><span class="sc ALL">A</span>All</span><span><span class="sc DEPARTMENT">D</span>Department</span><span><span class="sc OWN">O</span>Own</span><span><span class="sc LIMIT">L</span>Limit</span><span><span class="sc none">·</span>Not given</span></div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div id="matrixView" class="tablewrap matrix-wrap"></div>
+    <div id="roleView" hidden></div>
+  </main>
+
+  <dialog id="scopeDialog">
+    <form class="dlg" id="scopeForm" novalidate>
+      <h3 id="scopeTitle">Change permission</h3>
+      <div class="info" id="scopeInfo"></div>
+      <label>Scope <select name="scope" id="scopeSel"></select></label>
+      <label>Reason <input name="reason" type="text" maxlength="200" placeholder="Why this change is needed"></label>
+      <div class="err" id="scopeError"></div>
+      <div class="btns">
+        <button type="button" id="scopeCancel">Cancel</button>
+        <button type="submit" class="primary" id="scopeSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/roles.js"></script>
+</body>
+</html>

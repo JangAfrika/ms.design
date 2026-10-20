@@ -1,0 +1,33 @@
+/* ===== Design queue, design work and the item list ===== */
+.vlist { display: flex; flex-direction: column; gap: 10px; }
+.vcard { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: #fafbfd; }
+.vcard.approved { border-color: var(--green); box-shadow: inset 3px 0 0 var(--green); }
+.vcard.old { opacity: .75; }
+.vcard .vh { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.vcard .vh h4 { margin: 0; font-size: 13.5px; }
+.vcard .vh .by { color: var(--muted); font-size: 11.5px; margin-left: auto; }
+.vcard .vs { margin: 6px 0; font-size: 12.5px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vcard .files, .vcard .apprs { list-style: none; margin: 6px 0 0; padding: 0; font-size: 12.5px; }
+.vcard .files li, .vcard .apprs li { padding: 3px 0; overflow-wrap: anywhere; }
+.vcard .apprs li { border-top: 1px dashed #e3e7ee; padding-top: 5px; }
+.vcard .apprs .c { color: var(--muted); font-size: 12px; margin-top: 2px; white-space: pre-wrap; }
+.vcard .vacts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.vcard .vacts button { padding: 5px 11px; font-size: 12px; }
+.filelink { background: none; border: none; padding: 0; color: var(--brand, #12306b); font-weight: 600; cursor: pointer; text-align: left; font-size: inherit; }
+.filelink:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 11.5px; }
+.pre { white-space: pre-wrap; }
+.cat-list { list-style: none; margin: 0; padding: 0; font-size: 12.5px; }
+.cat-list li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #edf0f5; }
+.cat-list li:last-child { border-bottom: none; }
+.cat-list .code { color: var(--muted); font-family: Consolas, "Courier New", monospace; font-size: 11.5px; }
+.cat-list .n { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.cards a.card.on { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(18,48,107,.15); }
+.ro { background: #f3f5f9 !important; color: var(--muted) !important; }
+dialog.wide { width: min(560px, 94vw); }
+body.dark .vcard { background: #1b2130; border-color: #2c3445; }
+body.dark .vcard .apprs li { border-top-color: #2c3445; }
+body.dark .cat-list li { border-bottom-color: #2c3445; }
+body.dark .filelink { color: #8fb0ff; }
+body.dark .ro { background: #161a22 !important; }
