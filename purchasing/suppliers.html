@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suppliers · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Suppliers</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>Add supplier</button></div>
+    </div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search number, name, phone or TIN">
+      <select id="statusFilter"></select>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Number</th><th>Supplier</th><th>Phone</th><th>Payment terms</th><th class="num">Open orders</th><th class="num" id="owedHead">Owed</th><th>Status</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="supDialog" class="fin-wide">
+    <form class="dlg" id="supForm" novalidate>
+      <h3 id="supTitle">Add supplier</h3>
+      <div class="two">
+        <label class="req">Name <input name="supplier_name" id="sName" type="text" maxlength="160" required></label>
+        <label>Phone <input name="phone" id="sPhone" type="tel" maxlength="40"></label>
+      </div>
+      <div class="two">
+        <label>Email <input name="email" id="sEmail" type="email" maxlength="120"></label>
+        <label>TIN <input name="tin_number" id="sTin" type="text" maxlength="40"></label>
+      </div>
+      <label>Address <input name="address" id="sAddress" type="text" maxlength="300"></label>
+      <div class="two">
+        <label>Payment terms (days) <input name="payment_terms_days" id="sTerms" type="number" min="0" step="1"></label>
+        <label id="sStatusLbl">Status <select name="status" id="sStatus"></select></label>
+      </div>
+      <label id="sBankLbl">Bank details (Finance only) <textarea id="sBank" rows="2" maxlength="500"></textarea></label>
+      <label id="sReasonLbl">Reason for the change <input name="reason" id="sReason" type="text" maxlength="200"></label>
+      <div class="err" id="supError"></div>
+      <div class="btns">
+        <button type="button" id="supCancel">Cancel</button>
+        <button type="submit" class="primary" id="supSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/stores-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/suppliers.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
