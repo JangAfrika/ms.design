@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System settings · MS BMS</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>System settings</h1>
+      <div class="grow"><button type="button" id="reloadBtn">Refresh</button></div>
+    </div>
+    <p class="page-intro">Changes take effect immediately and are recorded in the audit log. Secret values stay hidden.</p>
+    <div class="toolbar" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search setting">
+      <select id="catFilter"></select>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Setting</th><th>Group</th><th>Value</th><th>Last changed</th><th></th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h" id="limits">Approval limits</h2>
+    <p class="page-intro">The most each role may approve, per kind of document, in GMD. Anything above goes to the role in "Above that". Purchase requests: the General Manager and the Finance Manager approve up to GMD 15,000 each; above that the CEO. Every change is recorded in the audit log.</p>
+    <div class="msg" id="limMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Document</th><th>Role</th><th class="num">Up to (GMD)</th><th>Above that</th><th>Status</th><th>Last changed</th><th></th></tr></thead>
+        <tbody id="limBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <dialog id="limDialog">
+    <form class="dlg" id="limForm" novalidate>
+      <h3 id="limTitle">Change approval limit</h3>
+      <div class="info" id="limInfo"></div>
+      <label class="req">Up to (GMD) <input name="max_amount" id="limMax" type="number" min="0" step="0.01" required></label>
+      <label>Above that, approved by <select name="escalate_to_role_id" id="limEsc"></select></label>
+      <label>Status <select name="status" id="limStatus"><option value="ACTIVE">Active</option><option value="INACTIVE">Switched off</option></select></label>
+      <label class="req">Reason <input name="reason" type="text" maxlength="200" placeholder="For example: owner's decision of 19 October"></label>
+      <div class="err" id="limError"></div>
+      <div class="btns">
+        <button type="button" id="limCancel">Cancel</button>
+        <button type="submit" class="primary" id="limSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="setDialog">
+    <form class="dlg" id="setForm" novalidate>
+      <h3 id="setTitle">Change setting</h3>
+      <div class="info" id="setInfo"></div>
+      <div id="setField"></div>
+      <label>Reason <input name="reason" type="text" maxlength="200" placeholder="Changed in settings"></label>
+      <div class="err" id="setError"></div>
+      <div class="btns">
+        <button type="button" id="setCancel">Cancel</button>
+        <button type="submit" class="primary" id="setSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/settings.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
