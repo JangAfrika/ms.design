@@ -1,0 +1,31 @@
+/* ===== People: attendance, leave, overtime, training, staff concerns ===== */
+.hr-clock { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.hr-clock .big { font-size: 20px; font-weight: 700; }
+.hr-clock .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.hr-clock .acts button { min-height: 44px; min-width: 130px; font-size: 15px; }
+.hr-month { display: inline-flex; align-items: center; gap: 6px; }
+.hr-month input[type=month] { width: auto; margin: 0; }
+.hr-month button { min-width: 36px; }
+.hr-pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0 0; }
+.hr-concern { border-top: 1px solid var(--line); padding: 10px 0; }
+.hr-concern:first-of-type { border-top: 0; }
+.hr-concern h4 { margin: 0 0 2px; font-size: 13.5px; }
+.hr-cal { border-collapse: collapse; font-size: 11.5px; }
+.hr-cal th, .hr-cal td { border: 1px solid var(--line); padding: 3px 4px; text-align: center; min-width: 24px; }
+.hr-cal th.n, .hr-cal td.n { text-align: left; white-space: nowrap; min-width: 140px; position: sticky; left: 0; background: var(--panel); }
+.hr-cal .off { background: #eef0f4; color: var(--muted); }
+.hr-cal .hol { background: #fdf0d5; }
+.hr-cal .away { background: #cfe3ff; font-weight: 700; }
+.hr-cal .wait { background: #fff1b8; }
+.hr-key { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.hr-key i { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line); vertical-align: -2px; margin-right: 4px; }
+body.dark .hr-cal .off { background: #23283a; }
+body.dark .hr-cal .hol { background: #3a321c; }
+body.dark .hr-cal .away { background: #25406b; }
+body.dark .hr-cal .wait { background: #4a4020; }
+.hr-warn { color: var(--red); font-weight: 600; }
+.hr-key i.away { background: #cfe3ff; }
+.hr-key i.wait { background: #fff1b8; }
+.hr-key i.hol { background: #fdf0d5; }
+.hr-key i.off { background: #eef0f4; }
+.toolbar input[type=month], .toolbar input[type=date] { width: auto; margin: 0; }
