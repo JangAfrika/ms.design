@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily cash count · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Daily cash count</h1>
+      <div class="grow"><button type="button" class="primary" id="countBtn" hidden>Count a till</button></div>
+    </div>
+    <div class="cards fin-cards" id="ccCards"></div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <select id="tillFilter" aria-label="Till"><option value="">All tills</option></select>
+      <select id="statusFilter" aria-label="Status"></select>
+      <label class="inline">From <input type="date" id="fromDate"></label>
+      <label class="inline">to <input type="date" id="toDate"></label>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Date</th><th>Till</th><th class="num">Books say</th><th class="num">Counted</th><th class="num">Difference</th><th>Status</th><th>Counted by</th><th>Checked by</th><th></th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+    <p class="fin-note">Count each till every working day (Monday to Saturday). The books say what the till should hold from the money that went in and out. A second person checks the count; a difference needs an explanation and stays on record. The month-end close wants a checked count for every working day.</p>
+  </main>
+
+  <dialog id="countDialog">
+    <form class="dlg" id="countForm" novalidate>
+      <h3 id="countTitle">Count a till</h3>
+      <div class="two">
+        <label class="req">Till <select name="cash_account_id" id="ctTill"></select></label>
+        <label class="req">Day <input name="recon_date" type="date" id="ctDate"></label>
+      </div>
+      <div class="info" id="ctExpected"></div>
+      <label class="req">Cash counted <input name="counted_balance" type="number" step="0.01" min="0" id="ctCounted"></label>
+      <div class="info" id="ctDiff" hidden></div>
+      <label id="ctWhyLabel" hidden class="req">Explain the difference <textarea name="explanation" rows="3" maxlength="300"></textarea></label>
+      <div class="err" id="countError"></div>
+      <div class="btns">
+        <button type="button" id="countCancel">Cancel</button>
+        <button type="submit" class="primary" id="countSave">Save count</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="checkDialog">
+    <form class="dlg" id="checkForm" novalidate>
+      <h3>Check this count</h3>
+      <div class="info" id="chkInfo"></div>
+      <label id="chkWhyLabel" hidden class="req">Explanation of the difference <textarea name="explanation" rows="3" maxlength="300"></textarea></label>
+      <div class="err" id="checkError"></div>
+      <div class="btns">
+        <button type="button" id="checkCancel">Cancel</button>
+        <button type="submit" class="primary" id="checkSave">Count is checked</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/finance-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/cash-count.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>

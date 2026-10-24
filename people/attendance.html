@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Attendance · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+  <link rel="stylesheet" href="css/hr.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Attendance</h1>
+      <div class="grow"><button type="button" id="restBtn" hidden>Mark the rest present</button> <button type="button" class="primary" id="holBtn" hidden>Add public holiday</button></div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button type="button" data-tab="day" class="on">Daily register</button>
+      <button type="button" data-tab="month">Monthly report</button>
+      <button type="button" data-tab="holidays">Public holidays</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+
+    <section id="dayPane">
+      <div class="toolbar" style="margin-top:0">
+        <button type="button" id="dPrev" aria-label="Previous day">&lsaquo;</button>
+        <input type="date" id="dDate" aria-label="Date">
+        <button type="button" id="dNext" aria-label="Next day">&rsaquo;</button>
+        <button type="button" id="dToday">Today</button>
+        <span id="dNote" class="muted"></span>
+      </div>
+      <div class="cards" id="dCards"></div>
+      <div class="tablewrap" style="margin-top:12px">
+        <table class="inv">
+          <thead><tr><th>Person</th><th>Status</th><th>In</th><th>Out</th><th class="num">Late (min)</th><th>Note</th><th></th></tr></thead>
+          <tbody id="dBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="monthPane" hidden>
+      <div class="toolbar" style="margin-top:0"><span id="mBar"></span><span class="muted" id="mNote"></span></div>
+      <div class="cards" id="mCards"></div>
+      <h3 class="sub-h">By department</h3>
+      <div class="tablewrap"><table class="inv"><thead><tr><th>Department</th><th class="num">Staff</th><th class="num">On time</th><th class="num">Late</th><th class="num">Absent</th><th class="num">Sick</th><th class="num">Not recorded</th><th class="num">Attendance</th><th class="num">On time %</th></tr></thead><tbody id="mDeps"></tbody></table></div>
+      <h3 class="sub-h">By person</h3>
+      <div class="tablewrap"><table class="inv"><thead><tr><th>Person</th><th class="num">On time</th><th class="num">Late</th><th class="num">Absent</th><th class="num">Leave</th><th class="num">Sick</th><th class="num">Not recorded</th><th class="num">Attendance</th><th class="num">On time %</th></tr></thead><tbody id="mBody"></tbody></table></div>
+    </section>
+
+    <section id="holPane" hidden>
+      <div class="tablewrap"><table class="inv"><thead><tr><th>Date</th><th>Day</th><th>Holiday</th><th></th></tr></thead><tbody id="hBody"></tbody></table></div>
+      <p class="fin-note">A public holiday is not a working day: nobody is late or absent on it and it is not counted as leave.</p>
+    </section>
+  </main>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui-common.js"></script>
+  <script src="js/hr-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/attendance.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>

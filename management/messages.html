@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Messages and requests · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+  <link rel="stylesheet" href="css/hr.css">
+  <link rel="stylesheet" href="css/mgmt.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head"><h1>Messages and requests</h1><div class="grow"></div><button type="button" class="primary" id="newMsg" hidden>New message</button><button type="button" class="primary" id="newReq" hidden>New request</button></div>
+    <div class="notice-bar">A message is private between two people. A request goes to a department (or one person in it), has a priority and a date, and is answered by someone other than the person who asked.</div>
+    <div class="tabs" id="tabs">
+      <button type="button" data-tab="inbox" class="on">Inbox</button>
+      <button type="button" data-tab="sent">Sent</button>
+      <button type="button" data-tab="req-incoming">Requests to me</button>
+      <button type="button" data-tab="req-mine">My requests</button>
+      <button type="button" data-tab="req-open">All open requests</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <div id="msgWrap"><div class="tablewrap"><table class="inv"><thead><tr><th>Person</th><th>Message</th><th>When</th><th></th></tr></thead><tbody id="msgBody"></tbody></table></div></div>
+    <div id="reqWrap" hidden><div class="tablewrap"><table class="inv"><thead><tr><th>Request</th><th>From</th><th>To</th><th>Priority</th><th>Needed by</th><th>Status</th><th></th></tr></thead><tbody id="reqBody"></tbody></table></div></div>
+    <div class="pager" id="pager"></div>
+  </main>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui-common.js"></script>
+  <script src="js/hr-common.js"></script>
+  <script src="js/mgmt-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/messages.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>

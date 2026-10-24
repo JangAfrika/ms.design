@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accounts & journal · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Accounts &amp; journal</h1>
+      <div class="grow" id="headActs"></div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="on" data-tab="chart">Chart of accounts</button>
+      <button type="button" data-tab="journal">Journal</button>
+      <button type="button" data-tab="money">Cash and bank</button>
+    </div>
+    <div class="msg" id="pageMsg" role="status"></div>
+
+    <section id="chartTab">
+      <div class="toolbar fin-filters" style="margin-top:0">
+        <input id="accSearch" type="search" placeholder="Search code or name">
+        <select id="accType"></select>
+        <label>Balances at <input id="accAsOf" type="date"></label>
+        <label class="check"><input type="checkbox" id="accInactive"> Show switched-off accounts</label>
+      </div>
+      <div class="tablewrap">
+        <table class="inv">
+          <thead><tr><th>Code</th><th>Account</th><th>Type</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead>
+          <tbody id="accBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="journalTab" hidden>
+      <div class="toolbar fin-filters" style="margin-top:0">
+        <input id="jSearch" type="search" placeholder="Search number or description">
+        <label>From <input id="jFrom" type="date"></label>
+        <label>To <input id="jTo" type="date"></label>
+        <select id="jAccount"><option value="">Any account</option></select>
+        <label class="check"><input type="checkbox" id="jManual"> Manual journals only</label>
+      </div>
+      <div class="msg" id="jMsg" role="status"></div>
+      <div class="tablewrap">
+        <table class="inv">
+          <thead><tr><th>Number</th><th>Date</th><th>Description</th><th>From</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody id="jBody"></tbody>
+        </table>
+      </div>
+      <div class="pager" id="jPager"></div>
+    </section>
+
+    <section id="moneyTab" hidden>
+      <div class="dgrid" style="margin-top:0">
+        <div class="dpanel wide"><h3>Tills and petty cash <button type="button" class="linkbtn" id="addCash" hidden>Add till</button></h3>
+          <div class="tablewrap"><table class="inv"><thead><tr><th>Name</th><th>Ledger account</th><th>Held by</th><th class="num">Float</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead><tbody id="cashBody"></tbody></table></div></div>
+        <div class="dpanel wide"><h3>Bank and mobile money accounts <button type="button" class="linkbtn" id="addBank" hidden>Add account</button></h3>
+          <div class="tablewrap"><table class="inv"><thead><tr><th>Bank</th><th>Account</th><th>Number</th><th>Ledger account</th><th>Currency</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead><tbody id="bankBody"></tbody></table></div></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="accDialog">
+    <form class="dlg" id="accForm" novalidate>
+      <h3 id="accTitle">Account</h3>
+      <div class="info">Codes have 4 digits: 1 assets, 2 liabilities, 3 equity, 4 revenue, 5 cost of sales, 6 expenses. A heading groups accounts and takes no postings. Once an account has postings its code and type stay fixed.</div>
+      <div class="two">
+        <label class="req">Code <input name="account_code" type="text" inputmode="numeric" maxlength="4" pattern="\d{4}"></label>
+        <label class="req">Type <select name="account_type" id="accTypeSel"></select></label>
+      </div>
+      <label class="req">Name <input name="account_name" type="text" maxlength="120"></label>
+      <label>Under heading <select name="parent_account_id" id="accParent"></select></label>
+      <div class="two">
+        <label class="check"><input name="is_postable" type="checkbox" checked> Takes postings (not a heading)</label>
+        <label>Status <select name="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Switched off</option></select></label>
+      </div>
+      <div class="err" id="accError"></div>
+      <div class="btns"><button type="button" id="accCancel">Cancel</button><button type="submit" class="primary" id="accSave">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="jeDialog" class="fin-wide">
+    <div class="dlg">
+      <div id="jeBody"></div>
+      <div class="err" id="jeError"></div>
+      <div class="btns" id="jeBtns"></div>
+    </div>
+  </dialog>
+
+  <dialog id="mjDialog" class="fin-wide">
+    <form class="dlg" id="mjForm" novalidate>
+      <h3>Manual journal</h3>
+      <div class="info">For corrections, opening balances, depreciation and other entries that no document posts. Debits must equal credits. It is posted at once and can only be undone by a reversal.</div>
+      <div class="two">
+        <label class="req">Date <input name="entry_date" id="mjDate" type="date"></label>
+        <label class="req">Description <input name="description" type="text" maxlength="200" placeholder="e.g. Depreciation October"></label>
+      </div>
+      <label class="req">Reason <input name="reason" type="text" maxlength="300" placeholder="Why this entry is needed"></label>
+      <div class="tablewrap"><table class="inv lines"><thead><tr><th>Account</th><th>Department</th><th class="num">Debit</th><th class="num">Credit</th><th></th></tr></thead><tbody id="mjLines"></tbody>
+        <tfoot><tr><td colspan="2" id="mjDiff"></td><td class="num" id="mjDr"></td><td class="num" id="mjCr"></td><td></td></tr></tfoot></table></div>
+      <div class="lines-foot"><button type="button" id="mjAdd">Add line</button></div>
+      <div class="err" id="mjError"></div>
+      <div class="btns"><button type="button" id="mjCancel">Cancel</button><button type="submit" class="primary" id="mjSave">Post journal</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="cashDialog">
+    <form class="dlg" id="cashForm" novalidate>
+      <h3 id="cashTitle">Till</h3>
+      <label class="req">Name <input name="account_name" type="text" maxlength="80" placeholder="e.g. Front desk till"></label>
+      <div class="two">
+        <label class="req">Ledger account <select name="gl_account_id" id="cashGl"></select></label>
+        <label class="req">Held by <select name="custodian_id" id="cashCust"></select></label>
+      </div>
+      <div class="two">
+        <label>Float (petty cash imprest) <input name="float_amount" type="number" min="0" step="0.01"></label>
+        <label>Status <select name="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Switched off</option></select></label>
+      </div>
+      <div class="err" id="cashError"></div>
+      <div class="btns"><button type="button" id="cashCancel">Cancel</button><button type="submit" class="primary" id="cashSave">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="bankDialog">
+    <form class="dlg" id="bankForm" novalidate>
+      <h3 id="bankTitle">Bank account</h3>
+      <div class="two">
+        <label class="req">Bank or wallet <input name="bank_name" type="text" maxlength="80" placeholder="e.g. Trust Bank, Wave"></label>
+        <label class="req">Account name <input name="account_name" type="text" maxlength="80"></label>
+      </div>
+      <div class="two">
+        <label id="bankNoLabel">Account number <input name="account_number" type="text" maxlength="40" placeholder="Only the last 4 digits are kept"></label>
+        <label class="req">Ledger account <select name="gl_account_id" id="bankGl"></select></label>
+      </div>
+      <div class="two">
+        <label>Currency <select name="currency" id="bankCur"></select></label>
+        <label>Status <select name="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Switched off</option></select></label>
+      </div>
+      <div class="err" id="bankError"></div>
+      <div class="btns"><button type="button" id="bankCancel">Cancel</button><button type="submit" class="primary" id="bankSave">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="noteDialog">
+    <form class="dlg" id="noteForm" novalidate>
+      <h3>Reverse journal</h3>
+      <div class="info" id="noteInfo"></div>
+      <label class="req">Reason <textarea id="noteText" rows="3" maxlength="300"></textarea></label>
+      <div class="err" id="noteError"></div>
+      <div class="btns"><button type="button" id="noteCancel">Cancel</button><button type="submit" class="danger-solid" id="noteSave">Reverse</button></div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/finance-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/accounts.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>

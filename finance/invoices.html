@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoices · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/finance.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="page-head">
+      <h1>Invoices</h1>
+      <div class="grow"><button type="button" class="primary" id="newBtn" hidden>New invoice</button></div>
+    </div>
+    <div class="cards fin-cards" id="ageCards"></div>
+    <div class="toolbar fin-filters" style="margin-top:0">
+      <input id="search" type="search" placeholder="Search number, customer or job">
+      <select id="statusFilter"></select>
+      <select id="typeFilter"></select>
+      <select id="custFilter"><option value="">All customers</option></select>
+      <label class="check"><input type="checkbox" id="overdueOnly"> Overdue only</label>
+      <label class="check"><input type="checkbox" id="openOnly"> Unpaid only</label>
+      <button type="button" id="reloadBtn" class="grow">Refresh</button>
+    </div>
+    <div class="msg" id="listMsg" role="status"></div>
+    <div class="tablewrap">
+      <table class="inv">
+        <thead><tr><th>Number</th><th>Date</th><th>Customer</th><th>Job</th><th>Due</th><th class="num">Total</th><th class="num">Balance due</th><th>Status</th></tr></thead>
+        <tbody id="listBody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+
+  <dialog id="newDialog" class="fin-mid">
+    <form class="dlg" id="newForm" novalidate>
+      <h3>New invoice</h3>
+      <div class="info">Choose the customer, then the job. An invoice for a job takes its lines from the job and the accepted proforma invoice, and deducts any deposit already invoiced. You can change the lines before issuing.</div>
+      <label class="req">Customer <select name="customer_id" id="nCustomer"></select></label>
+      <label>Job <select name="job_id" id="nJob"><option value="">— no job (type the lines) —</option></select></label>
+      <label class="req">Type <select name="invoice_type" id="nType">
+        <option value="INVOICE">Invoice</option>
+        <option value="DEPOSIT_INVOICE">Deposit invoice (advance before the work starts)</option>
+      </select></label>
+      <div class="two" id="nDepositRow" hidden>
+        <label>Deposit % <input name="deposit_pct" type="number" min="0" max="100" step="1" placeholder="from the proforma invoice"></label>
+        <label>or amount <input name="deposit_amount" type="number" min="0" step="0.01"></label>
+      </div>
+      <div class="err" id="newError"></div>
+      <div class="btns">
+        <button type="button" id="newCancel">Cancel</button>
+        <button type="submit" class="primary" id="newSave">Create draft</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/finance-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/invoices.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
