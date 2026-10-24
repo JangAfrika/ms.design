@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <main class="auth">
+    <form class="auth-card" id="loginForm" autocomplete="on" novalidate>
+      <div class="lg"><img alt="" data-app-logo><span class="auth-mark" data-app-mark>MS</span></div>
+      <h1 data-app-name>MS Designs &amp; Printing</h1>
+      <div class="sub" data-app-sub>Business Management System</div>
+      <div class="google-box" data-google hidden>
+        <div class="google-btn" data-google-btn="continue_with"></div>
+        <div class="or-line"><span>Or continue with email</span></div>
+      </div>
+      <label>Email or username
+        <input id="loginUser" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </label>
+      <label>Password
+        <input id="loginPass" type="password" autocomplete="current-password" required>
+      </label>
+      <div class="auth-row">
+        <label class="check"><input id="loginKeep" type="checkbox"> Keep me signed in on this computer</label>
+        <button type="button" class="linkbtn" id="forgotOpen">Forgot password?</button>
+      </div>
+      <div class="err" id="loginError" role="alert"></div>
+      <div class="auth-resend" id="resendBox" hidden>
+        <button type="button" id="resendBtn">Email me a new VERIFY link</button>
+      </div>
+      <button type="submit" class="primary wideBtn" id="loginBtn">Log in</button>
+      <div class="fp-box" id="fpBox" hidden>
+        <div class="or-line"><span>Or use your fingerprint</span></div>
+        <button type="button" class="fp-btn" id="fpBtn"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11v3.5a8 8 0 0 1-1.6 4.8"/><path d="M8.2 14.5c0 2.3-.6 4.3-1.7 5.9"/><path d="M15.6 13.5c0 3-.7 5.4-2 7.2"/><path d="M5 11a7 7 0 0 1 14 0v1.5"/><path d="M3.4 8.5A9.6 9.6 0 0 1 12 3a9.6 9.6 0 0 1 8.6 5.5"/><path d="M12 8a3 3 0 0 0-3 3v2"/><path d="M15 11v1"/></svg><span>Sign in with fingerprint</span></button>
+        <div class="err" id="fpError" role="alert"></div>
+      </div>
+      <div class="auth-foot">New to MS? <button type="button" class="linkbtn strong" id="signupOpen">Create an account</button></div>
+    </form>
+
+    <form class="auth-card" id="signupForm" hidden autocomplete="on" novalidate>
+      <div class="lg"><img alt="" data-app-logo><span class="auth-mark" data-app-mark>MS</span></div>
+      <h1>Create your account</h1>
+      <div class="sub">We email you a link to confirm your address. After that the System Administrator gives you access.</div>
+      <div class="google-box" data-google hidden>
+        <div class="google-btn" data-google-btn="signup_with"></div>
+        <div class="or-line"><span>Or sign up with email</span></div>
+      </div>
+      <label class="req">Full name
+        <input id="suName" type="text" autocomplete="name" maxlength="80" required>
+      </label>
+      <label class="req">Email address
+        <input id="suEmail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="120" required>
+      </label>
+      <label>Phone number <span class="opt">(optional)</span>
+        <input id="suPhone" type="tel" autocomplete="tel" maxlength="20" placeholder="+220 …">
+      </label>
+      <label class="req">Password <input id="suPass" type="password" autocomplete="new-password" minlength="6" required></label>
+      <div class="hint">At least 6 characters, with a number, a capital letter and a special character (like ! @ # or -).</div>
+      <label class="req">Repeat password <input id="suPass2" type="password" autocomplete="new-password" required></label>
+      <div class="err" id="signupError" role="alert"></div>
+      <button type="submit" class="primary wideBtn" id="signupBtn">Create account</button>
+      <div class="auth-foot">Already have an account? <button type="button" class="linkbtn strong" id="signupBack">Log in</button></div>
+    </form>
+
+    <section class="auth-card" id="sentCard" hidden aria-live="polite">
+      <div class="lg"><span class="auth-icon" aria-hidden="true">✉</span></div>
+      <h1>Check your email</h1>
+      <div class="sub" id="sentText">We sent a VERIFY link to your email address.</div>
+      <p class="auth-p">Open the email and click <b>VERIFY</b>. The link works once, for 24 hours. Not in your inbox? Look in the spam folder.</p>
+      <div class="err" id="sentError" role="alert"></div>
+      <button type="button" class="wideBtn plain" id="sentResend">Send the link again</button>
+      <div class="auth-foot"><button type="button" class="linkbtn strong" id="sentBack">Back to log in</button></div>
+    </section>
+
+    <section class="auth-card" id="waitCard" hidden aria-live="polite">
+      <div class="lg"><span class="auth-icon" aria-hidden="true">⏳</span></div>
+      <h1 id="waitTitle">Waiting for approval</h1>
+      <div class="sub" id="waitWho"></div>
+      <p class="auth-p" id="waitText">Your email address is confirmed. The System Administrator now checks your account and gives you the right access for your job. We will email you when it is ready; it is usually the same working day.</p>
+      <div class="err" id="waitError" role="alert"></div>
+      <button type="button" class="primary wideBtn" id="waitCheck">Check again</button>
+      <div class="auth-foot"><button type="button" class="linkbtn strong" id="waitOut">Sign out</button></div>
+    </section>
+
+    <form class="auth-card" id="forgotForm" hidden autocomplete="on">
+      <div class="lg"><img alt="" data-app-logo><span class="auth-mark" data-app-mark>MS</span></div>
+      <h1>Forgot your password?</h1>
+      <div class="sub">Enter your username or email address. We will email you a link to choose a new password. This also works if you signed up with Google and want a password too.</div>
+      <label>Username or email
+        <input id="forgotUser" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </label>
+      <div class="err" id="forgotError" role="alert"></div>
+      <button type="submit" class="primary wideBtn" id="forgotBtn">Email me a reset link</button>
+      <div class="auth-links"><button type="button" class="linkbtn" id="forgotBack">Back to sign in</button></div>
+    </form>
+
+    <form class="auth-card" id="resetForm" hidden autocomplete="on">
+      <div class="lg"><img alt="" data-app-logo><span class="auth-mark" data-app-mark>MS</span></div>
+      <h1>Choose a new password</h1>
+      <div class="sub">Enter your new password twice. You will then sign in with it.</div>
+      <label>New password <input id="rsNew" type="password" autocomplete="new-password" minlength="6" required></label>
+      <div class="hint">At least 6 characters, with a number, a capital letter and a special character (like ! @ # or -).</div>
+      <label>Repeat new password <input id="rsNew2" type="password" autocomplete="new-password" required></label>
+      <div class="err" id="resetError" role="alert"></div>
+      <button type="submit" class="primary wideBtn" id="resetBtn">Save new password</button>
+      <div class="auth-links"><button type="button" class="linkbtn" id="resetBack">Back to sign in</button></div>
+    </form>
+
+    <form class="auth-card" id="changeForm" hidden autocomplete="on">
+      <div class="lg"><img alt="" data-app-logo><span class="auth-mark" data-app-mark>MS</span></div>
+      <h1>Choose a new password</h1>
+      <div class="sub">You signed in with a temporary password. Choose your own before you continue.</div>
+      <label>Current (temporary) password <input id="chCur" type="password" autocomplete="current-password" required></label>
+      <label>New password <input id="chNew" type="password" autocomplete="new-password" minlength="6" required></label>
+      <div class="hint">At least 6 characters, with a number, a capital letter and a special character (like ! @ # or -).</div>
+      <label>Repeat new password <input id="chNew2" type="password" autocomplete="new-password" required></label>
+      <div class="err" id="changeError" role="alert"></div>
+      <button type="submit" class="primary wideBtn" id="changeBtn">Save password</button>
+      <div class="auth-links"><button type="button" class="linkbtn" id="changeCancel">Sign in as someone else</button></div>
+    </form>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/passkeys.js"></script>
+  <script src="js/pages/login.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
