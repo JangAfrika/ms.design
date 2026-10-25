@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Your design · MS Designs &amp; Printing</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/respond.css">
+</head>
+<body>
+  <main class="rp">
+    <div class="rp-wrap">
+      <section class="rp-card rp-head">
+        <img alt="" data-app-logo><span class="auth-mark" data-app-mark hidden>MS</span>
+        <h1 id="coName">MS Designs &amp; Printing</h1>
+        <div class="sub" id="subLine">Loading your design...</div>
+      </section>
+      <section class="rp-card rp-how" id="howCard" hidden aria-labelledby="howTitle">
+        <h2 id="howTitle">How this works</h2>
+        <p class="lead" id="howLead"></p>
+        <ol id="howList"></ol>
+        <p class="after" id="howAfter"></p>
+        <p class="when" id="howWhen"></p>
+      </section>
+      <section class="rp-card" id="stateCard" hidden aria-live="polite"></section>
+      <section class="rp-card" id="docCard" hidden>
+        <div class="rp-bar"><span>Design for <b id="docNo"></b></span></div>
+        <div id="files"></div>
+      </section>
+      <section class="rp-card rp-ask" id="askCard" hidden>
+        <h2>Your answer</h2>
+        <label for="rpName">Your full name <span class="opt">(this is your signature)</span></label>
+        <input id="rpName" type="text" maxlength="80" autocomplete="name" placeholder="Type your full name">
+        <label for="rpNote">Changes you would like <span class="opt">(needed only if you ask for changes)</span></label>
+        <textarea id="rpNote" maxlength="2000" placeholder="For example: please make the logo bigger, change the colour to ..."></textarea>
+        <div class="err" id="rpErr" role="alert"></div>
+        <div class="rp-btns">
+          <button type="button" class="rp-ok" id="okBtn">&#10003; APPROVE</button>
+          <button type="button" class="rp-ch" id="chBtn">REQUEST CHANGES</button>
+        </div>
+      </section>
+      <section class="rp-card rp-help" id="helpCard" aria-labelledby="helpTitle">
+        <h2 id="helpTitle">Need help?</h2>
+        <p>Call or write to us and we will gladly help.</p>
+        <div id="helpBody"></div>
+      </section>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/respond-common.js"></script>
+  <script src="js/pages/proof.js"></script>
+</body>
+</html>
