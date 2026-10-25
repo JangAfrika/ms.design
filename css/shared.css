@@ -1,0 +1,8 @@
+/* Small helpers used by several kept pages (HR, management, finance). */
+.soon { color: var(--amber, #a86a00); }
+.sub-h { margin: 12px 0 4px; font-size: 13px; }
+td.acts { white-space: nowrap; text-align: right; }
+td.acts button { margin-left: 4px; }
+.muted { color: var(--muted); }
+.small { font-size: 11.5px; }
+.pre { white-space: pre-wrap; }
