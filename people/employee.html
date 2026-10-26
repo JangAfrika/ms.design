@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employee · MS BMS</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="booting app">
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+  <header class="appbar"></header>
+  <main class="page">
+    <div class="crumbs" id="dCrumbs"><a href="people/employees.html">Employees</a></div>
+    <div class="page-head"><h1 id="dTitle">Employee</h1><div class="grow" id="dActions"></div></div>
+    <div class="msg" id="dStatus" role="status"></div>
+    <div id="dBody"></div>
+  </main>
+
+  <dialog id="editDialog">
+    <form class="dlg" id="editForm" novalidate>
+      <h3>Edit employee details</h3>
+      <div class="two">
+        <label class="req">First name <input name="first_name" type="text" maxlength="60" required></label>
+        <label class="req">Last name <input name="last_name" type="text" maxlength="60" required></label>
+      </div>
+      <div class="two">
+        <label>Other names <input name="other_names" type="text" maxlength="80"></label>
+        <label>Phone <input name="phone" type="tel" maxlength="40" placeholder="+220 …"></label>
+      </div>
+      <label>Address <input name="address" type="text" maxlength="200"></label>
+      <div class="two">
+        <label>Nationality <input name="nationality" type="text" maxlength="60"></label>
+        <label>Gender <select name="gender" id="edGender"></select></label>
+      </div>
+      <div class="two">
+        <label>Date of birth <input name="date_of_birth" type="date"></label>
+        <label>National ID number <input name="national_id_number" type="text" maxlength="40"></label>
+      </div>
+      <label>Emergency contact <input name="emergency_contact" type="text" maxlength="160" placeholder="Name and phone"></label>
+      <div class="err" id="editError"></div>
+      <div class="btns">
+        <button type="button" id="editCancel">Cancel</button>
+        <button type="submit" class="primary" id="editSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="jobDialog">
+    <form class="dlg" id="jobForm" novalidate>
+      <h3>Change position / pay</h3>
+      <div class="info">The current employment record is closed on the effective date and a new one starts. History is kept.</div>
+      <label>Position <select name="position_id" id="jPosition"></select></label>
+      <label>Reports to <select name="reporting_manager_id" id="jManager"></select></label>
+      <label id="jSalaryWrap" hidden>Basic salary <input name="basic_salary" type="number" min="0" step="0.01"></label>
+      <label>Effective date <input name="effective_date" type="date"></label>
+      <label class="req">Reason <input name="change_reason" type="text" maxlength="200" placeholder="Promotion, transfer, pay review…" required></label>
+      <div class="err" id="jobError"></div>
+      <div class="btns">
+        <button type="button" id="jobCancel">Cancel</button>
+        <button type="submit" class="primary" id="jobSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="statusDialog">
+    <form class="dlg" id="statusForm" novalidate>
+      <h3>Employment status</h3>
+      <div class="info">Changes the status of the current employment record. It does not change the login account; use User accounts for that.</div>
+      <div class="two">
+        <label class="req">Status <select name="status" id="sStatus"></select></label>
+        <label>Effective date <input name="effective_date" type="date"></label>
+      </div>
+      <label class="req">Reason <textarea name="reason" rows="3" maxlength="500" required></textarea></label>
+      <div class="err" id="statusError"></div>
+      <div class="btns">
+        <button type="button" id="statusCancel">Cancel</button>
+        <button type="submit" class="primary" id="statusSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="noticeDialog">
+    <form class="dlg" id="noticeForm" novalidate>
+      <h3 id="noticeTitle">Employment notice</h3>
+      <div class="info">The System Administrator receives this notice and applies the account change. It is recorded in the audit log.</div>
+      <div class="two">
+        <label class="req">Action <select name="action_type" id="nType"></select></label>
+        <label class="req">Effective date <input name="effective_date" type="date" required></label>
+      </div>
+      <label class="req">Reason <textarea name="reason" rows="4" maxlength="1000" required></textarea></label>
+      <div class="err" id="noticeError"></div>
+      <div class="btns">
+        <button type="button" id="noticeCancel">Cancel</button>
+        <button type="submit" class="primary" id="noticeSave">Send to System Administrator</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="loginDialog">
+    <form class="dlg" id="loginForm" novalidate>
+      <h3 id="loginTitle">Create login</h3>
+      <div class="info">A one-time password is made and emailed to this address with the username and how to choose their own password. You also see it once, right after saving.</div>
+      <label class="req">Username <input name="username" type="text" maxlength="40" required autocomplete="off"></label>
+      <div class="hint">Lower-case letters, numbers and dots.</div>
+      <label class="req">Email <input name="email" type="email" maxlength="120" required></label>
+      <label>Roles</label>
+      <div class="role-picks" id="loginRoles"></div>
+      <div class="err" id="loginError"></div>
+      <div class="btns">
+        <button type="button" id="loginCancel">Cancel</button>
+        <button type="submit" class="primary" id="loginSave">Create</button>
+      </div>
+    </form>
+  </dialog>
+  </div>
+</div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dialogs.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/employee.js"></script>
+  <script src="js/install.js"></script>
+</body>
+</html>
