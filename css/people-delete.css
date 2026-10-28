@@ -1,0 +1,28 @@
+dialog.pdlg { width: min(520px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto; }
+.pdlg .imdlg-body { padding-bottom: 4px; }
+.pdlg .imdlg-text { flex: 1; }
+.pdlg .imdlg-text label { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; }
+.pdlg .imdlg-text label input[type=text], .pdlg .imdlg-text label input[type=password] { display: block; width: 100%; margin-top: 4px; }
+.pdlg .imdlg-text label.check { display: flex; font-weight: 400; font-size: 13px; }
+.pdlg .imdlg-err { min-height: 16px; margin-top: 8px; font-size: 12.5px; color: #c62828; }
+.pd-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.pd-box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.45; }
+.pd-box b { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 3px; }
+.pd-box ul { margin: 0; padding-left: 16px; }
+.pd-box li { margin: 2px 0; }
+.pd-gone { background: rgba(211, 47, 47, .08); border-color: rgba(211, 47, 47, .35); }
+.pd-gone b { color: #c62828; }
+.pd-stays { background: rgba(46, 125, 50, .08); border-color: rgba(46, 125, 50, .35); }
+.pd-stays b { color: #2e7d32; }
+.pd-count { margin: 10px 0 0; padding: 9px 11px; border-radius: 8px; background: rgba(211, 47, 47, .12); color: #b71c1c; font-weight: 700; font-size: 14px; }
+.pd-names { margin: 6px 0 0 !important; font-size: 12px !important; color: var(--muted) !important; }
+.pdlg button.danger-solid svg, button.danger svg.ic { width: 15px; height: 15px; vertical-align: -3px; margin-right: 5px; }
+.pd-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; padding: 8px 12px; border-radius: 8px; background: rgba(211, 47, 47, .08); border: 1px solid rgba(211, 47, 47, .3); font-size: 13px; }
+.pd-bar[hidden] { display: none; }
+.pd-bar .grow { flex: 1; font-weight: 600; }
+td.sel, th.sel { width: 34px; padding-right: 0; }
+td.sel input, th.sel input { width: auto; margin: 0; }
+body.dark .pd-count, body.dark .pd-gone b { color: #ff8a8a; }
+body.dark .pd-stays b { color: #81c784; }
+body.dark .pdlg .imdlg-err { color: #ff8a8a; }
+@media (max-width: 520px) { .pd-cols { grid-template-columns: 1fr; } .pdlg .imdlg-body { padding: 16px 14px 4px; } .pdlg .imdlg-btns { padding: 12px 14px 16px; } }
