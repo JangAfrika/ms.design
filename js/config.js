@@ -25,6 +25,26 @@ window.APP_CONFIG = {
   // "Continue with Google" on the sign-in page: the OAuth client ID from Google Cloud (ends in .apps.googleusercontent.com).
   // It is NOT a secret. Put the same ID in System settings > GOOGLE_CLIENT_ID. Leave '' to hide the Google button.
   // Never put a client secret here or anywhere else.
+  // Google Analytics 4 usage tracking: the Measurement ID from Analytics > Admin > Data streams (looks like G-XXXXXXXXXX). Leave '' to switch tracking off.
+  // Only the page name, the role name and the device are sent. Never names, emails, customers, jobs or amounts.
+  ANALYTICS_ID: 'G-FLNJ28HJ3D',
+
   GOOGLE_CLIENT_ID: '560389458832-d2jchnffug3g4lr2tv2b81qln6rggeqt.apps.googleusercontent.com'
 };
 /* ================================================ */
+
+/* Google Analytics 4 (only when ANALYTICS_ID is set). Page views are sent with the page name; the role is added after sign-in. */
+(function () {
+  var id = (window.APP_CONFIG || {}).ANALYTICS_ID;
+  window.msTrack = function () {};
+  if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '');
+  window.gtag('config', id, { send_page_view: true, page_title: page, page_location: location.origin + location.pathname, anonymize_ip: true });
+  var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+  document.head.appendChild(s);
+  window.msTrack = function (name, params) { try { window.gtag('event', name, params || {}); } catch (e) {  } };
+  window.msTrackRole = function (role) { try { window.gtag('set', 'user_properties', { role: role }); } catch (e) {  } };
+})();
