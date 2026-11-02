@@ -305,6 +305,7 @@
 
   function draw(page) {
     const side = MS.$('side');
+    try { if (window.msTrackRole && MS.user) window.msTrackRole(((MS.user.roles || [])[0]) || 'none'); } catch (e) {  }
     side.innerHTML = sideHtml(page);
     document.querySelector('header.appbar').innerHTML = barHtml();
     wire();
