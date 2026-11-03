@@ -82,11 +82,36 @@
     document.head.appendChild(s);
   }
   async function onGoogle(resp) {
-    const target = $('signupForm').hidden ? 'loginError' : 'signupError';
-    note(target, 'Signing in with Google…', true);
+    const signup = !$('signupForm').hidden;
+    const target = signup ? 'signupError' : 'loginError';
+    if (!signup) {
+      note(target, 'Signing in with Google…', true);
+      try {
+        signedIn(await MS.call('AUTH_GOOGLE', { credential: resp && resp.credential, client_info: clientInfo() }));
+      } catch (err) { note(target, err.message); }
+      return;
+    }
+    note(target, 'Checking your Google account…', true);
     try {
-      signedIn(await MS.call('AUTH_GOOGLE', { credential: resp && resp.credential, client_info: clientInfo() }));
+      const r = await MS.call('AUTH_GOOGLE_CHECK', { credential: resp && resp.credential });
+      googleCred = resp.credential;
+      $('suName').value = r.full_name || '';
+      $('suEmail').value = r.email; $('suEmail').readOnly = true;
+      $('suPassBox').hidden = true; $('suPass').required = false; $('suPass2').required = false;
+      $('suPhoneOpt').textContent = '(required)';
+      document.querySelectorAll('#signupForm [data-google]').forEach((b) => { b.hidden = true; });
+      $('signupBtn').textContent = 'Finish sign-up';
+      note(target, 'Google confirmed ' + r.email + '. Check your name, add your contact number and finish.', true);
+      $('suPhone').focus();
     } catch (err) { note(target, err.message); }
+  }
+  let googleCred = '';
+  function resetSignupForm() {
+    googleCred = '';
+    $('suEmail').readOnly = false; $('suPassBox').hidden = false; $('suPass').required = true; $('suPass2').required = true;
+    $('suPhoneOpt').textContent = '(optional)';
+    document.querySelectorAll('#signupForm [data-google]').forEach((b) => { b.hidden = !googleReady; });
+    $('signupBtn').textContent = 'Create account';
   }
 
   function setupFingerprint() {
@@ -183,11 +208,23 @@
   $('signupOpen').addEventListener('click', () => {
     if ($('loginUser').value.indexOf('@') > 0) $('suEmail').value = $('loginUser').value.trim();
     note('signupError', '');
+    resetSignupForm();
     show('signupForm', 'suName');
   });
-  $('signupBack').addEventListener('click', () => backToSignIn(''));
+  $('signupBack').addEventListener('click', () => { resetSignupForm(); backToSignIn(''); });
   $('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (googleCred) {
+      const full_name = $('suName').value.trim(), phone = $('suPhone').value.trim();
+      if (!full_name || !phone) { note('signupError', 'Enter your full name and your contact phone number.'); return; }
+      const gb = $('signupBtn');
+      MS.busy(gb, true, 'Creating…');
+      note('signupError', '');
+      try {
+        signedIn(await MS.call('AUTH_GOOGLE_SIGNUP', { credential: googleCred, full_name, phone, client_info: clientInfo() }));
+      } catch (err) { note('signupError', err.message); } finally { MS.busy(gb, false); }
+      return;
+    }
     const d = { full_name: $('suName').value.trim(), email: $('suEmail').value.trim(), phone: $('suPhone').value.trim(), password: $('suPass').value, password_confirm: $('suPass2').value };
     if (!d.full_name || !d.email || !d.password) { note('signupError', 'Enter your full name, email address and a password.'); return; }
     if (d.password !== d.password_confirm) { note('signupError', 'The two passwords do not match.'); return; }
