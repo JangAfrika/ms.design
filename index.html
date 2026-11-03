@@ -60,12 +60,14 @@
       <label class="req">Email address
         <input id="suEmail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="120" required>
       </label>
-      <label>Phone number <span class="opt">(optional)</span>
+      <label>Phone number <span class="opt" id="suPhoneOpt">(optional)</span>
         <input id="suPhone" type="tel" autocomplete="tel" maxlength="20" placeholder="+220 …">
       </label>
+      <div id="suPassBox">
       <label class="req">Password <input id="suPass" type="password" autocomplete="new-password" minlength="6" required></label>
       <div class="hint">At least 6 characters, with a number, a capital letter and a special character (like ! @ # or -).</div>
       <label class="req">Repeat password <input id="suPass2" type="password" autocomplete="new-password" required></label>
+      </div>
       <div class="err" id="signupError" role="alert"></div>
       <button type="submit" class="primary wideBtn" id="signupBtn">Create account</button>
       <div class="auth-foot">Already have an account? <button type="button" class="linkbtn strong" id="signupBack">Log in</button></div>
