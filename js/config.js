@@ -37,7 +37,7 @@ window.APP_CONFIG = {
 (function () {
   var id = (window.APP_CONFIG || {}).ANALYTICS_ID;
   window.msTrack = function () {};
-  if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
+  if (!id || !/^G-[A-Z0-9]+$/i.test(id) || typeof location === 'undefined' || typeof document === 'undefined') return;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
   window.gtag('js', new Date());
