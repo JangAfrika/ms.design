@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Check a signed document · MS Designs &amp; Printing</title>
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <meta name="theme-color" content="#1b3a6b">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/respond.css">
+</head>
+<body>
+  <main class="rp">
+    <div class="rp-wrap">
+      <section class="rp-card rp-head">
+        <img alt="" data-app-logo><span class="auth-mark" data-app-mark hidden>MS</span>
+        <h1>MS Designs &amp; Printing</h1>
+        <div class="sub">Check a signed invoice or receipt</div>
+      </section>
+      <section class="rp-card rp-ask">
+        <h2>Verification code</h2>
+        <p>Type the code printed under the signature on the document, for example <b>AB12-CD34-EF56</b>.</p>
+        <form id="vForm" novalidate>
+          <label for="vCode">Code</label>
+          <input id="vCode" type="text" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX">
+          <div class="err" id="vErr" role="alert"></div>
+          <div class="rp-btns"><button type="submit" class="rp-ok" id="vGo">CHECK</button></div>
+        </form>
+      </section>
+      <section class="rp-card" id="vResult" hidden aria-live="polite"></section>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/respond-common.js"></script>
+  <script src="js/pages/verify.js"></script>
+</body>
+</html>
