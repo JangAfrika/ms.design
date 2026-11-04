@@ -1,0 +1,105 @@
+.fin-cards { margin-bottom: 12px; }
+.fin-filters .check { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12.5px; white-space: nowrap; }
+.fin-filters .check input { width: auto; margin: 0; }
+table.inv td.neg, .neg { color: var(--red); }
+table.inv tr.void td { color: var(--muted); text-decoration: line-through; }
+table.inv tr.hd td { font-weight: 700; background: #f8f9fc; }
+table.inv tr.sub-acc td:first-child { padding-left: 26px; }
+table.inv tr.inactive td { color: var(--muted); }
+table.inv tfoot td { font-weight: 700; border-top: 1px solid var(--line); border-bottom: none; }
+table.inv input.amt { width: 120px; text-align: right; margin: 0; padding: 5px 7px; }
+table.inv.lines td.a { width: 230px; }
+table.inv.lines td.c { width: 150px; }
+.fin-note { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+.fin-left { font-size: 12.5px; margin: 8px 0 0; }
+.fin-left b { font-variant-numeric: tabular-nums; }
+dialog.fin-wide { width: min(820px, 96vw); }
+dialog.fin-mid { width: min(620px, 96vw); }
+.dlg .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .dlg .three { grid-template-columns: minmax(0, 1fr); } }
+.dlg .tablewrap { max-height: 320px; overflow: auto; margin-bottom: 8px; }
+.report-head { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin: 0 0 12px; }
+.report-head label { margin: 0; }
+.report-head input, .report-head select { margin: 0; width: auto; }
+.report-scroll { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+table.pl th { text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; background: #f8f9fc; }
+table.pl th:first-child { text-align: left; }
+table.pl td:first-child { white-space: nowrap; }
+table.pl tr.acc td:first-child { padding-left: 24px; }
+table.pl tr.check td { color: var(--green); font-weight: 600; }
+table.pl tr.check.bad td { color: var(--red); }
+
+.fdoc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; color: var(--ink); }
+.fdoc-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px; }
+.fdoc-co { font-weight: 800; letter-spacing: .04em; font-size: 16px; }
+.fdoc-co .sub { display: block; font-weight: 400; letter-spacing: 0; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.fdoc-title { text-align: right; }
+.fdoc-title .t { font-weight: 700; letter-spacing: .1em; font-size: 15px; }
+.fdoc-title .no { font-family: ui-monospace, Consolas, monospace; font-size: 16px; color: #c2410c; font-weight: 700; }
+.fdoc-parties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; font-size: 12.5px; }
+.fdoc-parties .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.fdoc-parties .box { overflow-wrap: anywhere; }
+.fdoc-facts { display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; }
+.fdoc-facts dt { color: var(--muted); }
+.fdoc-facts dd { margin: 0; }
+.fdoc .totals { max-width: 320px; }
+.fdoc .totals div.due { font-weight: 700; font-size: 15px; color: var(--navy); }
+.fdoc-foot { margin-top: 18px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.fdoc-sign { margin-top: 28px; border-top: 1px solid var(--ink); width: 220px; padding-top: 4px; font-size: 11.5px; color: var(--muted); }
+.fdoc .stamp { display: inline-block; border: 2px solid var(--green); color: var(--green); font-weight: 800; letter-spacing: .1em; padding: 2px 10px; border-radius: 4px; transform: rotate(-4deg); }
+.fdoc .stamp.void { border-color: var(--red); color: var(--red); }
+@media (max-width: 640px) { .fdoc { padding: 14px; } .fdoc-parties { grid-template-columns: minmax(0, 1fr); } .fdoc-title { text-align: left; } }
+#printArea { display: none; }
+
+body.dark table.inv tr.hd td, body.dark table.pl th, body.dark table.pl tr.grp td { background: #1d222c; }
+body.dark table.pl td { border-bottom-color: var(--line); }
+body.dark .fdoc-title .no { color: #f0a070; }
+body.dark .fdoc-head { border-bottom-color: var(--ink); }
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body, body.dark { --ink: #000; --muted: #555; --line: #999; --panel: #fff; --navy: #000; --green: #116b2e; --red: #a31b1b; font-size: 11pt; }
+  .no-print, .crumbs, .msg, .page-head .grow, .toolbar, .tabs, .pager, .report-head button { display: none !important; }
+  .page { padding: 0 !important; max-width: none; }
+  .fdoc { border: 0; padding: 0; background: #fff; color: #000; }
+  .fdoc-title .no { color: #000; }
+  .fdoc table.inv th { background: #fff !important; color: #000; }
+  .fdoc table.inv td, .fdoc table.inv th { border-bottom: 1px solid #999; padding: 4px 6px; white-space: normal; }
+  .report-scroll { border: 0; overflow: visible; }
+  table.pl th, table.pl tr.grp td { background: #fff !important; color: #000; }
+  body.print-doc .main > *:not(#printArea), body.print-doc .shell > *:not(.main) { display: none !important; }
+  body.print-doc #printArea { display: block !important; }
+}
+body.dark .tabs button { background: none; border-color: transparent; border-bottom: 2px solid transparent; color: var(--muted); }
+body.dark .tabs button.on { color: var(--navy); border-bottom-color: var(--navy); }
+.report-scroll table.pl td, .report-scroll table.pl th { padding-left: 8px; padding-right: 8px; }
+
+.fin-filters label.inline { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12.5px; white-space: nowrap; }
+.fin-filters label.inline input { width: auto; margin: 0; }
+.dpanel h3 .h3-acts { font-weight: 400; font-size: 12px; color: var(--muted); margin-left: 6px; }
+table.inv td .sub.neg { color: var(--red); }
+.doc-frame { width: 100%; height: 70vh; border: 1px solid var(--line, #ccd); background: #fff; border-radius: 6px; }
+.doc-dlg { min-width: min(820px, 92vw); }
+#docSend { width: min(580px, 94vw); } #docSend .dlg { box-sizing: border-box; } #docSend input[type=text], #docSend input[type=email], #docSend select { width: 100%; box-sizing: border-box; }
+#docSend textarea { width: 100%; box-sizing: border-box; }
+@media (max-width: 600px) { .doc-dlg { min-width: 0; } .doc-frame { height: 60vh; } }
+
+.rcpt-box { display: flex; flex-direction: column; gap: 8px; border: 2px dashed var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0; background: #f8f9fc; }
+.rcpt-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.rcpt-pick { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-weight: 600; cursor: pointer; flex: 1 1 180px; margin: 0; }
+.rcpt-pick.primary { background: #12306b; color: #fff; border-color: #12306b; }
+.rcpt-name { font-size: 13px; color: var(--muted); word-break: break-all; }
+body.dark .rcpt-box { background: #1b2230; } body.dark .rcpt-pick { background: #232a38; }
+.upload-form { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+
+.fdoc-head { align-items: center; border-bottom: 4px solid #1b3a6b; }
+.fdoc-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; color: #1b3a6b; letter-spacing: .02em; }
+.fdoc-logo img { height: 64px; width: 64px; object-fit: contain; }
+.fdoc-addr { text-align: right; font-size: 12px; line-height: 1.45; margin-left: auto; }
+.fdoc-titlebar { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.fdoc-titlebar .t { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: .04em; font-size: 18px; }
+.fdoc-titlebar .no { font-family: ui-monospace, Consolas, monospace; font-weight: 700; color: #c2410c; }
+.fdoc-box { border-collapse: collapse; font-size: 12.5px; min-width: 240px; }
+.fdoc-box td, .fdoc-box th { border: 1px solid var(--ink); padding: 3px 14px; text-align: center; }
+.fdoc-box th { text-align: left; font-weight: 600; }
+@media (max-width: 640px) { .fdoc-addr { text-align: left; margin-left: 0; } }
