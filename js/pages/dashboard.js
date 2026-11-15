@@ -30,10 +30,10 @@
     adjustments: 'Damage, loss and found stock, with approval', 'opening-stock': 'What was on the shelves on day one, checked by Finance',
     'purchase-requests': 'Ask for something to be bought', 'purchase-orders': 'Orders sent to suppliers', 'goods-received': 'Check deliveries into stock',
     'supplier-bills': 'Bills from suppliers, checked and paid', suppliers: 'Who we buy from',
-    'gm-reports': 'Daily, weekly and monthly reports', 'monthly-dashboard': 'The one-page month at a glance', backups: 'Copy data to Drive'
+    'gm-reports': 'Daily, weekly and monthly reports', 'monthly-dashboard': 'The one-page month at a glance', backups: 'Copy data to Drive', health: 'Timed jobs, backup, email and settings checks'
   };
   const FOCUS = [
-    [/SYSTEM_ADMIN/, ['users', 'roles', 'section-teams', 'employees', 'settings', 'backups', 'activity', 'messages']],
+    [/SYSTEM_ADMIN/, ['users', 'roles', 'section-teams', 'employees', 'settings', 'health', 'backups', 'activity', 'messages']],
     [/\bCEO\b|ADMIN_MD|GENERAL_MANAGER/, ['locations', 'kpi-board', 'kpi-review', 'gm-reports', 'issues', 'meetings', 'jobs', 'quotations', 'monthly-report', 'reports', 'job-profit', 'gra', 'cash-forecast', 'budget',  'revenue', 'purchase-requests', 'customers', 'payroll', 'attendance', 'leave', 'overtime', 'employees', 'section-teams']],
     [/FINANCE_DIRECTOR/, ['locations', 'kpi-board', 'quotations', 'invoices', 'payments', 'expenses', 'items', 'supplier-bills', 'ageing', 'job-profit', 'cash-forecast', 'budget', 'revenue', 'reports', 'close', 'monthly-report', 'payroll', 'gra', 'cash-count', 'bank-recon', 'jobs']],
     [/FINANCE/, ['quotations', 'kpi-board', 'invoices', 'payments', 'expenses', 'items', 'supplier-bills', 'ageing', 'cash-count', 'bank-recon', 'gra', 'cash-forecast', 'close', 'monthly-report', 'payroll', 'budget', 'revenue', 'reports', 'overtime']],
@@ -60,7 +60,7 @@
 
   const DO_MAX = 8;
   const DO_ORDER = [
-    [/SYSTEM_ADMIN/, ['approve', 'people', 'teams', 'roles', 'settings', 'activity', 'alerts']],
+    [/SYSTEM_ADMIN/, ['approve', 'people', 'teams', 'roles', 'settings', 'health', 'activity', 'alerts']],
     [/GENERAL_MANAGER/, ['newjob', 'approve', 'discount', 'where', 'jobs', 'reports', 'teams', 'messages']],
     [/\bCEO\b|ADMIN_MD/, ['approve', 'discount', 'where', 'jobs', 'reports', 'messages', 'alerts', 'people']],
     [/FINANCE/, ['proforma', 'customer', 'discount', 'payment', 'invoices', 'expense', 'reports', 'approve']],
@@ -100,6 +100,7 @@
       teams: { icon: 'team', label: 'Section teams', href: 'admin/section-teams.html', any: ['SECTION_TEAM_MANAGE'] },
       roles: { icon: 'shield', label: 'Who may do what', href: 'admin/roles.html', any: ['USER_VIEW'] },
       settings: { icon: 'settings', label: 'Settings', href: 'admin/settings.html', any: ['SYSTEM_CONFIG'] },
+      health: { icon: 'activity', label: 'System health', href: 'admin/health.html', any: ['SYSTEM_CONFIG'], badge: (w.accounts && w.accounts.health_problems) || 0 },
       activity: { icon: 'activity', label: 'What happened', href: 'admin/activity.html', any: ['AUDIT_VIEW'] }
     };
     const order = (DO_ORDER.find(([re]) => re.test(who())) || [null, DO_DEFAULT])[1];
@@ -326,6 +327,7 @@
       cards.push(card('Active logins', w.accounts.active, w.accounts.must_change + ' still on a first password', 'admin/users.html', '', 'accounts'));
       cards.push(card('Locked logins', w.accounts.locked, 'too many wrong passwords', 'admin/users.html', w.accounts.locked ? 'red' : '', 'accounts'));
       cards.push(card('New sign-ups waiting', w.accounts.signups_waiting || 0, 'approve or reject them', 'admin/users.html?tab=signups', w.accounts.signups_waiting ? 'red' : '', 'accounts'));
+      if (w.accounts.health_problems) cards.push(card('System health', w.accounts.health_problems, 'item(s) to check: timed jobs or website address', 'admin/health.html', 'red', 'accounts'));
     }
     if (w.progress) {
       const c = w.progress.counts, n = c.IN_SECTIONS + c.IN_PRODUCTION_DEPT + c.ON_HOLD;
