@@ -67,7 +67,8 @@ button.ghost:hover, a.ghost:hover { background: rgba(255,255,255,.12); }
 .chips button { border-radius: 999px; padding: 5px 11px; font-size: 12px; }
 .chips button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 .toolbar input[type=search] { max-width: 260px; margin: 0; }
-.toolbar select { width: auto; margin: 0; }
+.toolbar select { width: auto; max-width: 100%; min-width: 0; margin: 0; text-overflow: ellipsis; }
+.toolbar input { max-width: 100%; min-width: 0; }
 
 .tablewrap { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
 table.inv { width: 100%; border-collapse: collapse; font-size: 12.5px; }

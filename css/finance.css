@@ -1,6 +1,8 @@
 .fin-cards { margin-bottom: 12px; }
 .fin-filters .check { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12.5px; white-space: nowrap; }
 .fin-filters .check input { width: auto; margin: 0; }
+.fin-filters select { max-width: 100%; min-width: 0; }
+.fin-filters { flex-wrap: wrap; }
 table.inv td.neg, .neg { color: var(--red); }
 table.inv tr.void td { color: var(--muted); text-decoration: line-through; }
 table.inv tr.hd td { font-weight: 700; background: #f8f9fc; }
