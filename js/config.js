@@ -2,7 +2,7 @@
 window.APP_CONFIG = {
   // Your Apps Script Web App URL (Deploy > Manage deployments). It ends with /exec.
   // Editing the existing deployment (New version) keeps the same URL.
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxt_twiWkV4UZjCV7QQaYA-pezEaApMgJg0PcEJgkrTHAb0JkYqVCLFe2ccdviPF7lF/exec',
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxcb5PCe3HZSRNuQ7vGf2ZKClwWC7bmM27BEccTkNUj8DwEfyGPpygz2NeA-5HjwQop/exec',
 
   APP_NAME: 'MS Designs & Printing',
   APP_SUB: 'Business Management System',
