@@ -94,6 +94,7 @@
       { page: 'settings', href: 'admin/settings.html', label: 'System settings', icon: 'settings', any: ['SYSTEM_CONFIG'] },
       { page: 'activity', href: 'admin/activity.html', label: 'Activity (audit)', icon: 'activity', any: ['AUDIT_VIEW'] },
       { page: 'errors', href: 'admin/errors.html', label: 'Errors', icon: 'flag', any: ['AUDIT_VIEW'] },
+      { page: 'health', href: 'admin/health.html', label: 'System health', icon: 'activity', any: ['SYSTEM_CONFIG'] },
       { page: 'backups', href: 'management/backups.html', label: 'Backups & exports', icon: 'database', any: ['BACKUP_RUN'] }
     ] }
   ];
